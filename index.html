@@ -608,7 +608,7 @@
                     </div>
                     <div class="footer-section">
                         <h3>Contact Info</h3>
-                        <p>Email: sarathkumar455@gmail.com</p>
+                        <p>Email: sarathkumar45@gmail.com</p>
                         <p>Serving: Rural & Semi-Urban Kerala</p>
                         <p>Vision: Every Indian Village</p>
                     </div>
@@ -1026,10 +1026,40 @@
             stats.forEach(stat => observer.observe(stat));
         }
 
+        // Handle URL hash navigation
+        function handleHashNavigation() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            if (hash === 'terms' || hash === 'privacy' || hash === 'home') {
+                showPage(hash);
+            }
+        }
+
         // Initialize animations when page loads
         document.addEventListener('DOMContentLoaded', function() {
             animateStats();
+            handleHashNavigation(); // Handle initial hash
         });
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashNavigation);
+
+        // Update showPage function to also update the URL hash
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update URL hash without page reload
+            if (window.location.hash.substring(1) !== pageId) {
+                window.history.pushState(null, null, '#' + pageId);
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
