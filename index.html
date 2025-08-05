@@ -49,6 +49,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo-icon {
@@ -459,7 +465,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">
+            <div class="logo" onclick="showPage('home')">
                 <div class="logo-icon">24</div>
                 <span class="logo-text">Eleven</span>
             </div>
