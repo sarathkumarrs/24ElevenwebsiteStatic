@@ -3,1069 +3,435 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24Eleven - Shop. Save. Repeat</title>
+    <title>24Eleven - Empowering Retail with Smart Credit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: #22C55E;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #22C55E;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: #22C55E;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            color: white;
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: slideInUp 1s ease-out 0.2s both;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            max-width: 600px;
-            animation: slideInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            animation: slideInUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #22C55E;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #22C55E;
-            transform: translateY(-3px);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: #f8fafc;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1f2937;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #22C55E, #16A34A);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 2rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-
-        .feature-card p {
-            color: #6b7280;
-            line-height: 1.7;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 6rem 0;
-            background: white;
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: #22C55E;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 2rem;
-        }
-
-        .step h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-
-        .step p {
-            color: #6b7280;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #22C55E;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.8;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 6rem 0;
-            background: #22C55E;
-            text-align: center;
-            color: white;
-        }
-
-        .cta-section h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .cta-section p {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        footer {
-            background: #1f2937;
-            color: white;
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #22C55E;
-        }
-
-        .footer-section a {
-            color: #d1d5db;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .footer-section a:hover {
-            color: #22C55E;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #374151;
-            color: #9ca3af;
-        }
-
-        /* Page Content (for Terms and Privacy) */
-        .page-content {
-            margin-top: 100px;
-            padding: 4rem 0;
-            min-height: calc(100vh - 100px);
-        }
-
-        .page-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #1f2937;
-        }
-
-        .page-content h2 {
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem;
-            color: #22C55E;
-        }
-
-        .page-content h3 {
-            font-size: 1.3rem;
-            margin: 1.5rem 0 0.5rem;
-            color: #374151;
-        }
-
-        .page-content p {
-            margin-bottom: 1rem;
-            line-height: 1.7;
-            color: #4b5563;
-        }
-
-        .page-content ul {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-
-        .page-content li {
-            margin-bottom: 0.5rem;
-            color: #4b5563;
-        }
-
-        /* Animations */
-        @keyframes slideInUp {
+        /* Custom animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
-
-        /* Hide pages initially */
-        .page {
-            display: none;
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
-
-        .page.active {
-            display: block;
+        
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50">
     <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo" onclick="showPage('home')">
-                <div class="logo-icon">24</div>
-                <span class="logo-text">Eleven</span>
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">24</span>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">Eleven</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
+                    <a href="#solution" class="text-gray-700 hover:text-blue-600 transition">Solution</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 transition">How it Works</a>
+                    <a href="#impact" class="text-gray-700 hover:text-blue-600 transition">Impact</a>
+                    <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Get Started</a>
+                </div>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
-            <ul class="nav-links">
-                <li><a onclick="showPage('home')">Home</a></li>
-                <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
-                <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Home Page -->
-    <div id="home" class="page active">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>24Eleven</h1>
-                    <p class="hero-subtitle">Shop. Save. Repeat</p>
-                    <p class="hero-description">
-                        Kerala's first hyperlocal delivery platform designed specifically for rural and semi-urban communities. Connecting you with trusted local vendors for all your daily essentials.
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up">
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                        Unlock Credit for 
+                        <span class="gradient-text">Small Retailers</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        24Eleven bridges the ₹8,000 Cr credit gap for Kerala's retailers with smart technology. 
+                        Free POS software, automated credit scoring, and instant access to working capital.
                     </p>
-                    <div class="cta-buttons">
-                        <a href="#" class="btn btn-primary">Download App</a>
-                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition inline-flex items-center justify-center">
+                            Start Your Journey
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#how-it-works" class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition inline-flex items-center justify-center">
+                            See How It Works
+                        </a>
+                    </div>
+                    <div class="mt-12 flex items-center gap-8 text-gray-600">
+                        <div>
+                            <span class="text-3xl font-bold text-gray-900">1.2L+</span>
+                            <p class="text-sm">Retailers in Kerala</p>
+                        </div>
+                        <div class="border-l-2 border-gray-300 pl-8">
+                            <span class="text-3xl font-bold text-gray-900">₹5L Cr</span>
+                            <p class="text-sm">National Credit Gap</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features" id="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose 24Eleven?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🛍️</div>
-                        <h3>Hyperlocal Convenience</h3>
-                        <p>Access to local products without traveling to stores. Supporting familiar neighborhood businesses in your community.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🌐</div>
-                        <h3>Malayalam & English</h3>
-                        <p>Bilingual platform with voice search for low-literacy users. Simple navigation designed specifically for rural users.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>24/7 Availability</h3>
-                        <p>Round-the-clock service with reliable delivery within rural communities. Offline ordering via SMS/Call backup system.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🤝</div>
-                        <h3>Trusted Local Vendors</h3>
-                        <p>Curated network of verified local vendors. Quality assurance with regular audits and customer feedback systems.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">💳</div>
-                        <h3>Flexible Payments</h3>
-                        <p>Cash on delivery, UPI, and other local payment options. No complicated payment processes or hidden charges.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Kerala Specialties</h3>
-                        <p>Traditional Kerala snacks, homemade products, festival items, and fresh local produce from your neighborhood.</p>
-                    </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl transform rotate-6 opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&w=600&q=80" alt="Retail Shop" class="relative rounded-3xl shadow-2xl">
                 </div>
             </div>
-        </section>
-
-        <!-- How It Works Section -->
-        <section class="how-it-works">
-            <div class="container">
-                <h2 class="section-title">How 24Eleven Works</h2>
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Order via Mobile App</h3>
-                        <p>Browse local products, add to cart, and place your order through our easy-to-use mobile application.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Local Store Receives</h3>
-                        <p>Your trusted neighborhood store receives and packs your order with care and attention to quality.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Track & Manage</h3>
-                        <p>24Eleven tracks and manages your delivery through our comprehensive dashboard system.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>Home Delivery</h3>
-                        <p>Receive your order at your doorstep through our reliable local delivery network.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat">
-                        <div class="stat-number">₹393.6B</div>
-                        <div class="stat-label">Total Addressable Market</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">18M+</div>
-                        <div class="stat-label">Rural Kerala Population</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">4.1M</div>
-                        <div class="stat-label">Target Households</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Villages to Launch</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <h2>Ready to Experience Convenience?</h2>
-                <p>Join thousands of families across Kerala who trust 24Eleven for their daily essentials.</p>
-                <a href="#" class="btn btn-primary">Download App Now</a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>24Eleven</h3>
-                        <p>Enabling Market Convenience, Village by Village. Kerala's trusted hyperlocal delivery network for rural communities.</p>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Quick Links</h3>
-                        <a onclick="showPage('home')">Home</a>
-                        <a onclick="showPage('terms')">Terms & Conditions</a>
-                        <a onclick="showPage('privacy')">Privacy Policy</a>
-                        <a href="#">Download App</a>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Contact Info</h3>
-                        <p>Email: sarathkumar45@gmail.com</p>
-                        <p>Serving: Rural & Semi-Urban Kerala</p>
-                        <p>Vision: Every Indian Village</p>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Services</h3>
-                        <a href="#">Grocery Essentials</a>
-                        <a href="#">Fresh Fruits & Vegetables</a>
-                        <a href="#">Pharmacy & Health</a>
-                        <a href="#">Local Specialties</a>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 24Eleven. All rights reserved. | Designed for Rural Kerala</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Terms & Conditions Page -->
-    <div id="terms" class="page">
-        <div class="container page-content">
-            <h1>Terms and Conditions</h1>
-            <p><strong>Last updated:</strong> December 2024</p>
-
-            <h2>1. Acceptance of Terms</h2>
-            <p>By downloading, installing, or using the 24Eleven mobile application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our service.</p>
-
-            <h2>2. About 24Eleven</h2>
-            <p>24Eleven is a hyperlocal delivery platform that connects customers in rural and semi-urban Kerala with local vendors and stores. We facilitate the ordering and delivery of groceries, essentials, and local products through our mobile application.</p>
-
-            <h2>3. User Eligibility</h2>
-            <p>You must be at least 18 years old to use our services. By using 24Eleven, you represent that you meet this age requirement and have the legal capacity to enter into these terms.</p>
-
-            <h2>4. Service Availability</h2>
-            <p>Our services are currently available in select rural and semi-urban areas of Kerala. Service availability may vary by location and is subject to change without prior notice.</p>
-
-            <h2>5. User Account</h2>
-            <ul>
-                <li>You are responsible for providing accurate account information</li>
-                <li>You must maintain the confidentiality of your account credentials</li>
-                <li>You are responsible for all activities under your account</li>
-                <li>Notify us immediately of any unauthorized use of your account</li>
-            </ul>
-
-            <h2>6. Orders and Payments</h2>
-            <h3>6.1 Order Placement</h3>
-            <ul>
-                <li>Orders can be placed through our mobile app or via phone/SMS</li>
-                <li>All orders are subject to availability and vendor confirmation</li>
-                <li>We reserve the right to cancel orders for any reason</li>
-            </ul>
-
-            <h3>6.2 Payment Methods</h3>
-            <ul>
-                <li>We accept cash on delivery, UPI, and other local payment methods</li>
-                <li>Payment is due upon delivery for cash on delivery orders</li>
-                <li>All prices are inclusive of applicable taxes</li>
-            </ul>
-
-            <h2>7. Delivery</h2>
-            <ul>
-                <li>Delivery times are estimates and may vary based on location and availability</li>
-                <li>We strive to deliver within 2-4 hours in rural areas</li>
-                <li>Delivery charges may apply based on location and order value</li>
-                <li>You must be available to receive deliveries at the specified address</li>
-            </ul>
-
-            <h2>8. Cancellation and Refunds</h2>
-            <ul>
-                <li>Orders can be cancelled before vendor confirmation</li>
-                <li>Refunds for prepaid orders will be processed within 5-7 business days</li>
-                <li>Perishable items may not be eligible for returns</li>
-                <li>Damaged or incorrect items will be replaced or refunded</li>
-            </ul>
-
-            <h2>9. User Conduct</h2>
-            <p>You agree not to:</p>
-            <ul>
-                <li>Use the service for any illegal or unauthorized purpose</li>
-                <li>Interfere with or disrupt the service</li>
-                <li>Provide false or misleading information</li>
-                <li>Harass or abuse our delivery personnel or vendors</li>
-            </ul>
-
-            <h2>10. Vendor Relationships</h2>
-            <p>24Eleven acts as a platform connecting customers with local vendors. We are not responsible for the quality, safety, or legality of products sold by vendors, though we maintain quality standards through our verification process.</p>
-
-            <h2>11. Limitation of Liability</h2>
-            <p>24Eleven's liability is limited to the value of your order. We are not liable for indirect, incidental, or consequential damages arising from use of our service.</p>
-
-            <h2>12. Intellectual Property</h2>
-            <p>The 24Eleven app, logo, and all content are our intellectual property. You may not copy, modify, or distribute our content without written permission.</p>
-
-            <h2>13. Privacy</h2>
-            <p>Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and protect your information.</p>
-
-            <h2>14. Modifications</h2>
-            <p>We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting in the app. Continued use constitutes acceptance of modified terms.</p>
-
-            <h2>15. Termination</h2>
-            <p>We may terminate your account and access to our services at any time for violation of these terms or for any other reason at our sole discretion.</p>
-
-            <h2>16. Governing Law</h2>
-            <p>These terms are governed by the laws of India and the state of Kerala. Any disputes will be resolved in the courts of Kerala.</p>
-
-            <h2>17. Contact Information</h2>
-            <p>For questions about these Terms and Conditions, please contact us at:<br>
-            Email: sarathkumar45@gmail.com</p>
-
-            <p><strong>24Eleven - Enabling Market Convenience, Village by Village</strong></p>
         </div>
-    </div>
+    </section>
 
-    <!-- Privacy Policy Page -->
-    <div id="privacy" class="page">
-        <div class="container page-content">
-            <h1>Privacy Policy</h1>
-            <p><strong>Last updated:</strong> December 2024</p>
-
-            <h2>1. Introduction</h2>
-            <p>At 24Eleven, we are committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, store, and protect your information when you use our hyperlocal delivery platform.</p>
-
-            <h2>2. Information We Collect</h2>
-            
-            <h3>2.1 Personal Information</h3>
-            <ul>
-                <li>Name and contact details (phone number, email address)</li>
-                <li>Delivery addresses</li>
-                <li>Payment information (for digital payments)</li>
-                <li>Account credentials and preferences</li>
-            </ul>
-
-            <h3>2.2 Order Information</h3>
-            <ul>
-                <li>Products ordered and purchase history</li>
-                <li>Order timing and frequency</li>
-                <li>Delivery preferences and special instructions</li>
-                <li>Feedback and ratings</li>
-            </ul>
-
-            <h3>2.3 Technical Information</h3>
-            <ul>
-                <li>Device information (model, operating system, app version)</li>
-                <li>Location data (with your permission) for delivery purposes</li>
-                <li>App usage data and interaction patterns</li>
-                <li>Log files and crash reports</li>
-            </ul>
-
-            <h3>2.4 Communication Data</h3>
-            <ul>
-                <li>Customer service interactions</li>
-                <li>SMS and call logs (for order confirmation and delivery)</li>
-                <li>Marketing preferences</li>
-            </ul>
-
-            <h2>3. How We Use Your Information</h2>
-            
-            <h3>3.1 Service Provision</h3>
-            <ul>
-                <li>Processing and fulfilling your orders</li>
-                <li>Coordinating deliveries with local vendors</li>
-                <li>Managing your account and preferences</li>
-                <li>Providing customer support</li>
-            </ul>
-
-            <h3>3.2 Service Improvement</h3>
-            <ul>
-                <li>Analyzing usage patterns to improve our platform</li>
-                <li>Personalizing your shopping experience</li>
-                <li>Developing new features and services</li>
-                <li>Conducting research and analytics</li>
-            </ul>
-
-            <h3>3.3 Communication</h3>
-            <ul>
-                <li>Sending order confirmations and delivery updates</li>
-                <li>Notifying you about new services and offers</li>
-                <li>Conducting customer satisfaction surveys</li>
-                <li>Providing important service announcements</li>
-            </ul>
-
-            <h2>4. Information Sharing and Disclosure</h2>
-            
-            <h3>4.1 With Vendors</h3>
-            <p>We share necessary order information with local vendors to fulfill your purchases, including your name, delivery address, and ordered items.</p>
-
-            <h3>4.2 With Delivery Partners</h3>
-            <p>Delivery personnel receive your name, address, phone number, and order details to complete deliveries.</p>
-
-            <h3>4.3 With Service Providers</h3>
-            <p>We may share information with trusted third-party service providers who assist in:</p>
-            <ul>
-                <li>Payment processing</li>
-                <li>SMS and communication services</li>
-                <li>App analytics and crash reporting</li>
-                <li>Cloud storage and hosting</li>
-            </ul>
-
-            <h3>4.4 Legal Requirements</h3>
-            <p>We may disclose information when required by law, court order, or government regulation, or to protect our rights, property, or safety.</p>
-
-            <h2>5. Data Security</h2>
-            <p>We implement appropriate technical and organizational measures to protect your personal information:</p>
-            <ul>
-                <li>Encryption of sensitive data in transit and at rest</li>
-                <li>Secure servers and database protection</li>
-                <li>Access controls and authentication measures</li>
-                <li>Regular security audits and updates</li>
-                <li>Employee training on data protection</li>
-            </ul>
-
-            <h2>6. Data Retention</h2>
-            <p>We retain your information for as long as necessary to provide our services and comply with legal obligations:</p>
-            <ul>
-                <li>Account information: Until account deletion</li>
-                <li>Order history: 7 years for tax and legal purposes</li>
-                <li>Communication records: 3 years</li>
-                <li>Technical logs: 1 year</li>
-            </ul>
-
-            <h2>7. Your Rights and Choices</h2>
-            
-            <h3>7.1 Access and Correction</h3>
-            <ul>
-                <li>View and update your account information</li>
-                <li>Request copies of your personal data</li>
-                <li>Correct inaccurate information</li>
-            </ul>
-
-            <h3>7.2 Data Control</h3>
-            <ul>
-                <li>Delete your account and associated data</li>
-                <li>Opt-out of marketing communications</li>
-                <li>Withdraw consent for location tracking</li>
-                <li>Request data portability</li>
-            </ul>
-
-            <h3>7.3 Communication Preferences</h3>
-            <ul>
-                <li>Unsubscribe from promotional messages</li>
-                <li>Choose preferred communication channels</li>
-                <li>Set notification preferences in the app</li>
-            </ul>
-
-            <h2>8. Location Data</h2>
-            <p>We collect location information to:</p>
-            <ul>
-                <li>Determine service availability in your area</li>
-                <li>Optimize delivery routes and timing</li>
-                <li>Connect you with nearby vendors</li>
-                <li>Provide location-based offers and services</li>
-            </ul>
-            <p>You can disable location services in your device settings, though this may affect service functionality.</p>
-
-            <h2>9. Cookies and Tracking</h2>
-            <p>Our app may use cookies and similar technologies to:</p>
-            <ul>
-                <li>Remember your preferences and settings</li>
-                <li>Analyze app performance and usage</li>
-                <li>Provide personalized content</li>
-                <li>Improve security and prevent fraud</li>
-            </ul>
-
-            <h2>10. Children's Privacy</h2>
-            <p>Our services are not intended for children under 18. We do not knowingly collect personal information from children. If we become aware of such collection, we will delete the information immediately.</p>
-
-            <h2>11. Third-Party Links</h2>
-            <p>Our app may contain links to third-party websites or services. We are not responsible for their privacy practices. Please review their privacy policies before providing any information.</p>
-
-            <h2>12. International Data Transfers</h2>
-            <p>Your information may be processed and stored outside of Kerala or India. We ensure appropriate safeguards are in place for such transfers in compliance with applicable laws.</p>
-
-            <h2>13. Data Breach Notification</h2>
-            <p>In the event of a data breach that may affect your personal information, we will:</p>
-            <ul>
-                <li>Notify affected users within 72 hours</li>
-                <li>Report to relevant authorities as required</li>
-                <li>Take immediate steps to secure the breach</li>
-                <li>Provide guidance on protective measures</li>
-            </ul>
-
-            <h2>14. Updates to Privacy Policy</h2>
-            <p>We may update this Privacy Policy periodically. Changes will be posted in the app with an updated date. Significant changes will be communicated via email or app notification.</p>
-
-            <h2>15. Contact Us</h2>
-            <p>For privacy-related questions, concerns, or requests, please contact us:</p>
-            <ul>
-                <li><strong>Email:</strong> sarathkumar45@gmail.com</li>
-                <li><strong>Subject Line:</strong> Privacy Policy Inquiry - 24Eleven</li>
-                <li><strong>Response Time:</strong> We aim to respond within 48 hours</li>
-            </ul>
-
-            <h2>16. Compliance</h2>
-            <p>This Privacy Policy complies with:</p>
-            <ul>
-                <li>Information Technology Act, 2000 (India)</li>
-                <li>Information Technology (Reasonable Security Practices) Rules, 2011</li>
-                <li>Kerala State privacy regulations</li>
-                <li>Google Play Store privacy requirements</li>
-            </ul>
-
-            <h2>17. Vendor Privacy</h2>
-            <p>Our partner vendors are required to:</p>
-            <ul>
-                <li>Maintain confidentiality of customer information</li>
-                <li>Use customer data only for order fulfillment</li>
-                <li>Follow our data protection guidelines</li>
-                <li>Report any data incidents immediately</li>
-            </ul>
-
-            <h2>18. Your Consent</h2>
-            <p>By using 24Eleven, you consent to the collection, use, and sharing of your information as described in this Privacy Policy. You can withdraw consent at any time by deleting your account.</p>
-
-            <p><strong>Thank you for trusting 24Eleven with your information. We are committed to protecting your privacy while providing the best hyperlocal delivery experience in rural Kerala.</strong></p>
-
-            <p><em>"Enabling Market Convenience, Village by Village" - with complete respect for your privacy.</em></p>
+    <!-- Problem Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">The Credit Crisis</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Small retailers are the backbone of India's economy, yet they're locked out of formal credit
+                </p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-ban text-3xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">70%</h3>
+                    <p class="text-gray-600">Loan applications rejected by banks</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-percentage text-3xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">18-36%</h3>
+                    <p class="text-gray-600">Interest rates from informal lenders</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-file-invoice text-3xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">No Records</h3>
+                    <p class="text-gray-600">Most retailers lack formal financial history</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Limited Growth</h3>
+                    <p class="text-gray-600">Can't stock inventory or expand</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">The 24Eleven Solution</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We're not a lender. We're the technology infrastructure that makes retail lending viable.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-gift text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Free Business Tools</h3>
+                    <p class="text-gray-600 mb-4">
+                        Get professional POS, accounting software, and GST filing tools worth ₹24,000/year absolutely free
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Digital billing & inventory</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Automated accounting</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>GST compliance made easy</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Build Credit Profile</h3>
+                    <p class="text-gray-600 mb-4">
+                        We track your sales data for 6-12 months to create a verified credit score that lenders trust
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Real-time data capture</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>AI-powered credit scoring</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Verified business metrics</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-hand-holding-usd text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Access Working Capital</h3>
+                    <p class="text-gray-600 mb-4">
+                        Get connected with verified lenders offering competitive rates based on your actual business performance
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Pre-approved loans</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Competitive interest rates</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto-repayment via NACH</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">How 24Eleven Works</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Simple steps to transform your business with smart credit access
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <div class="flex items-center gap-8">
+                        <div class="flex-shrink-0 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">1</div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Sign Up & Get Free Tools</h3>
+                            <p class="text-gray-600">Register your business and instantly access our free POS and accounting software. Start digitizing your operations from day one.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-8">
+                        <div class="flex-shrink-0 w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">2</div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Run Your Business Digitally</h3>
+                            <p class="text-gray-600">Use our tools for daily billing, inventory management, and accounting. We'll automatically track and verify your sales data.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-8">
+                        <div class="flex-shrink-0 w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">3</div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Build Your Credit Score</h3>
+                            <p class="text-gray-600">After 6 months of data, we generate your business credit score based on actual performance metrics that lenders value.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-8">
+                        <div class="flex-shrink-0 w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">4</div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Access Pre-Approved Loans</h3>
+                            <p class="text-gray-600">Get matched with verified NBFCs and banks offering working capital at competitive rates. Apply with one click.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-20 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Creating Real Impact</h2>
+                <p class="text-xl text-indigo-200 max-w-3xl mx-auto">
+                    24Eleven is more than a platform - it's a movement to empower India's retail ecosystem
+                </p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-store text-4xl mb-4"></i>
+                    <h3 class="text-3xl font-bold mb-2">10,000+</h3>
+                    <p class="text-indigo-200">Retailers to be empowered</p>
+                </div>
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-rupee-sign text-4xl mb-4"></i>
+                    <h3 class="text-3xl font-bold mb-2">₹500 Cr</h3>
+                    <p class="text-indigo-200">Working capital to be unlocked</p>
+                </div>
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-briefcase text-4xl mb-4"></i>
+                    <h3 class="text-3xl font-bold mb-2">50,000+</h3>
+                    <p class="text-indigo-200">Jobs to be supported</p>
+                </div>
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-chart-line text-4xl mb-4"></i>
+                    <h3 class="text-3xl font-bold mb-2">25x</h3>
+                    <p class="text-indigo-200">Average business growth</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Ready to Transform Your Business?</h2>
+                <p class="text-xl text-gray-600 mb-8">
+                    Join thousands of retailers building credit history and accessing working capital with 24Eleven
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition inline-flex items-center justify-center">
+                        Get Started Free
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="tel:+919876543210" class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition inline-flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        Talk to Expert
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Get in Touch</h2>
+                <form class="bg-white rounded-2xl shadow-lg p-8">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Business Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Your Shop Name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Email (Optional)</label>
+                        <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="your@email.com">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Location</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            <option>Thiruvananthapuram</option>
+                            <option>Kollam</option>
+                            <option>Pathanamthitta</option>
+                            <option>Alappuzha</option>
+                            <option>Kottayam</option>
+                            <option>Idukki</option>
+                            <option>Ernakulam</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition">
+                        Start Your Free Trial
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">24</span>
+                        </div>
+                        <span class="text-2xl font-bold">Eleven</span>
+                    </div>
+                    <p class="text-gray-400">Empowering small retailers with smart credit solutions</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#solution" class="hover:text-white transition">How it Works</a></li>
+                        <li><a href="#impact" class="hover:text-white transition">Our Impact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i>+91 98765 43210</li>
+                        <li><i class="fas fa-envelope mr-2"></i>hello@24eleven.in</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Punalur, Kerala</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 24Eleven by Efuturex Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        function showPage(pageId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Smooth scrolling for anchor links
+        // Smooth scroll behavior for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to navigation
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const nav = document.querySelector('nav');
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            lastScrollTop = scrollTop;
-        });
-
-        // Animate stats on scroll
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = entry.target;
-                        const finalValue = target.textContent;
-                        let currentValue = 0;
-                        const increment = finalValue.includes('₹') ? 50 : 
-                                        finalValue.includes('M') ? 1 : 
-                                        finalValue.includes('K') ? 10 : 1;
-                        
-                        const timer = setInterval(() => {
-                            if (finalValue.includes('₹')) {
-                                currentValue += increment;
-                                if (currentValue >= 393.6) {
-                                    target.textContent = '₹393.6B';
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = `₹${currentValue}B`;
-                                }
-                            } else if (finalValue.includes('M')) {
-                                currentValue += increment;
-                                if (currentValue >= 18) {
-                                    target.textContent = '18M+';
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = `${currentValue}M`;
-                                }
-                            } else if (finalValue.includes('4.1M')) {
-                                currentValue += 0.1;
-                                if (currentValue >= 4.1) {
-                                    target.textContent = '4.1M';
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = `${currentValue.toFixed(1)}M`;
-                                }
-                            } else {
-                                currentValue += increment;
-                                if (currentValue >= 100) {
-                                    target.textContent = '100+';
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = currentValue;
-                                }
-                            }
-                        }, 50);
-                        
-                        observer.unobserve(target);
-                    }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
-            
-            stats.forEach(stat => observer.observe(stat));
-        }
-
-        // Handle URL hash navigation
-        function handleHashNavigation() {
-            const hash = window.location.hash.substring(1); // Remove the #
-            if (hash === 'terms' || hash === 'privacy' || hash === 'home') {
-                showPage(hash);
-            }
-        }
-
-        // Initialize animations when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            animateStats();
-            handleHashNavigation(); // Handle initial hash
         });
 
-        // Listen for hash changes
-        window.addEventListener('hashchange', handleHashNavigation);
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-        // Update showPage function to also update the URL hash
-        function showPage(pageId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update URL hash without page reload
-            if (window.location.hash.substring(1) !== pageId) {
-                window.history.pushState(null, null, '#' + pageId);
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
